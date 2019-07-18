@@ -60,24 +60,7 @@ public class Robot extends TimedRobot {
 	}
 	@Override
 	public void teleopPeriodic() {
-		RobotStopWatch watch = new RobotStopWatch("teleopPeriodic");
-		double matchTime = driverStation.getMatchTime();
-		boolean opControl = driverStation.isOperatorControl();
-		if (opControl && (matchTime < 30.0)) {
-			if (armCurrent < maxArmCurrent) {
-				rightArm.configContinuousCurrentLimit(maxArmCurrent, 30);
-				leftArm.configContinuousCurrentLimit(maxArmCurrent, 30);
-				armCurrent = maxArmCurrent;
-			}
-		}
-
-		if (opControl && (matchTime < 20) && (matchTime > 0)) {
-			if (compressorEnabled) {
-				compressor.stop();
-				compressorEnabled=false;
-				System.out.println("Stopped Compressor at " + matchTime);
-			}
-		}
+		
 		try {
 			actions.input(new DriverInput()
 				.withInput("Operator-Start-Button",	xbox.getRawButton(8)) 		//  boost
